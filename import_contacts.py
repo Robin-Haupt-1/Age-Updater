@@ -17,13 +17,17 @@ class ImportContactsDialog(QDialog):
         self.filename = fname[0]
         self.contacts_file.setText(self.filename)
         contacts = read_contacts(fname[0])
-        if not contacts:
-            display_warning("", "This .csv file is not a valid contact export file")
-        else:
-            showInfo(str(contacts))
+        if contacts:
+            imported_contacts=[]
             for c in contacts:
-                create_age_card(self.mw, c[0], c[1], deck)
+                try:
+                    create_age_card(self.mw, c[0], c[1], deck)
+                    imported_contacts.append(c)
+                except Exception as e:
+                    display_warning("Error while importing the contact for "+c[0])
+
             update_age_cards(self.mw)
+            showInfo("The following contacts have been imported:<br><br>-" + "<br> - ".join([f'{x[0]} ({x[1]})' for x in imported_contacts]) + "<br>")
 
     def deck_with_most_age_cards(self):
         age_cards = self.mw.col.findCards(f'"note:{NOTETYPE_NAME}"')

@@ -1,5 +1,6 @@
 import csv
 import datetime
+from .utils import *
 
 
 def read_contacts(csv_file):
@@ -8,12 +9,17 @@ def read_contacts(csv_file):
     print(contacts[0])
     try:
         birthday_row = contacts[0].index("Birthday")
-    except ValueError as e:
-        print("not a valid contacts csv", e)
+    except ValueError:
+        display_warning("This is not a valid contacts csv file")
         return None
 
     is_outlook = False
-    all_contacts_w_birthday = [x for x in contacts[1:] if x[birthday_row]]
+    try:
+        all_contacts_w_birthday = [x for x in contacts[1:] if x[birthday_row]]
+    except IndexError:
+        display_warning("None of your contacts have their date of birth specified")
+        return None
+
 
     if all_contacts_w_birthday[0][birthday_row].find(".") != -1:  # check if its in Google or Outlook format: Google is YYYY-MM-DD, Outlook is DD.MM.YYYY.
         is_outlook = True

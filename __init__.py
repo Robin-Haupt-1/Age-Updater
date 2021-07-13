@@ -25,6 +25,8 @@ gui_hooks.profile_did_open.append(lambda *args: init())
 gui_hooks.profile_will_close.append(lambda *args: update_age_cards(mw))
 gui_hooks.sync_will_start.append(lambda *args: update_age_cards(mw))
 gui_hooks.reviewer_did_show_question.append(lambda *args: interval_update())
+gui_hooks.editor_did_init.append(lambda *args: interval_update())
+gui_hooks.add_cards_did_add_note(lambda *args:update_age_cards(mw))
 
 
 # Set up Menu items
