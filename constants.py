@@ -6,7 +6,6 @@ DATE_OF_BIRTH_FIELD = "Date of birth (YYYY-MM-DD)"
 FIELD_NAMES = [NAME_FIELD, AGE_FIELD, DATE_OF_BIRTH_FIELD]
 DATE_FORMAT = '%Y-%m-%d'
 DECK_NAME = "Age Updater"
-DATE_OF_BIRTH_FIELD_NO = 2
 
 # Model information
 

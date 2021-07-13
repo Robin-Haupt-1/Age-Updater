@@ -18,7 +18,7 @@ def add_model(col):
     template['qfmt'] = CARD_FRONT
     template['afmt'] = CARD_BACK
     model['css'] = CARD_CSS
-    model['sortf'] = 0  # set sortfield to 'Name'
+    model['sortf'] = 0  # set sort field to 'Name'
     models.addTemplate(model, template)
     models.add(model)
 
