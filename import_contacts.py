@@ -118,9 +118,11 @@ class ImportContactsDialog(QDialog):
         grid.addWidget(self.contacts_file, 1, 1)
         self.setLayout(grid)
 
+        # initialize widgets
         self.select_deck_widget = QWidget()
         self.deck_list_widget = QListWidget()
         self.filter_deck_textbox = QLineEdit()
+        self.filter_deck_textbox.setPlaceholderText(" Filter...")
         self.select_deck_button = QPushButton()
 
     def eventFilter(self, obj: QObject, evt: QEvent) -> bool:  # inspired by Anki studydeck.py

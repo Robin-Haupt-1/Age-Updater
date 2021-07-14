@@ -33,7 +33,7 @@ gui_hooks.add_cards_did_add_note(lambda *args:update_age_cards(mw))
 
 menu = mw.form.menuTools.addMenu("Age Updater")
 
-action = QAction("Update age cards", mw)
+action = QAction("Update age notes", mw)
 qconnect(action.triggered, lambda *args: update_age_cards(mw))
 menu.addAction(action)
 

@@ -17,38 +17,55 @@ CARD_FRONT = """\
 </span>
 <br>
 <br>
-{{NAME_FIELD}}
+{{Name}}
 
-<br>
-<span id="birthday_notification"><br>It's their birthday today! 🎂<br><br></span>
+<br><br>
+<span id="birthday_notification">
+	It's their birthday today! 🎂
+<br><br></span>
 
+<span id="use_desktop_warning">
+	⚠️ This card is outdated. Please launch Anki on desktop to update your Age Updater notes.
+<br><br></span>
 
 <script>
+
     var today = new Date();
-    var dd = String(today.getDate());
-    var mm = String(today.getMonth() + 1); //January is 0
-    var today_string = mm + "-" + dd;
-    var yyyy = today.getFullYear();
-    var cardOutput = "{{text:Date of birth}}";
+    var today_dd =today.getDate();
+    var today_mm = today.getMonth() + 1; //January is 0
+    var today_string =String(today_mm) + "-" + String(today_dd);
+    var today_yyyy = today.getFullYear();
+    var dob = "{{text:Date of birth (YYYY-MM-DD)}}".split("-");
+	var anki_age=parseInt("{{text:Age}}");
+	
 
-    var dob = "{{text:Date of birth}}".split("-");
-
-    mm = String(parseInt(dob[1])) // parseInt to remove leading zeros
-    dd = String(parseInt(dob[2])) // parseInt to remove leading zeros
-    var dob_string = mm + "-" + dd;
+    dob_mm = parseInt(dob[1])
+    dob_dd = parseInt(dob[2])
+    dob_yyyy=parseInt(dob[0])
+    var dob_string = String(dob_mm) + "-" +String(dob_dd);
 
     birthday_today = false;
     
     if (today_string == dob_string) {
         birthday_today = true;
     }
+
     // handle leap year birthdays
-    is_leap_year =new Date(yyyy, 1, 29).getDate() === 29;
-    if (today_string == "3-1" && dob_string == "2-29" && is_leap_year) {
+    is_leap_year =new Date(today_yyyy, 1, 29).getDate() === 29;
+    if (!is_leap_year && today_string == "3-1" && dob_string == "2-29") {
         birthday_today = true;
     }
     if (birthday_today) {
         document.getElementById("birthday_notification").style.display = "block";
+    }
+    
+    // check if age in card is still current
+    var current_age= (today_yyyy - dob_yyyy) - 1
+    if ((today_mm>dob_mm)||(today_mm===dob_mm && today_dd>=dob_dd)){
+		 current_age+=1
+    }
+    if (!(current_age===anki_age)){
+        document.getElementById("use_desktop_warning").style.display = "block";
     }
 
 </script>\

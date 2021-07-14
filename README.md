@@ -15,7 +15,7 @@ In a deck of your choice, create a new note of this type and fill in your friend
 
 Make sure the date of birth is in the format YYYY-MM-DD (e.g. 1990-4-30, leading zeros are not required)
 
-The addon will keep checking the notes for changes in the background and update the age values as needed. You can also force a refresh by launching the card editor / browser or clicking the sync button to sync your collection with AnkiWeb. 
+The addon will keep checking the notes for changes in the background and update the age values as needed. You can also force a refresh by clicking on Tools -> Age Updater -> Update age notes.
 
 
 
