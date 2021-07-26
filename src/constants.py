@@ -31,9 +31,9 @@ CARD_FRONT = """\
 <script>
 
     var today = new Date();
-    var today_dd =today.getDate();
+    var today_dd = today.getDate();
     var today_mm = today.getMonth() + 1; //January is 0
-    var today_string =String(today_mm) + "-" + String(today_dd);
+    var today_string = String(today_mm) + "-" + String(today_dd);
     var today_yyyy = today.getFullYear();
     var dob = "{{text:Date of birth (YYYY-MM-DD)}}".split("-");
 	var anki_age=parseInt("{{text:Age}}");
