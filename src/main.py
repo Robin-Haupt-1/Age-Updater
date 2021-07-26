@@ -1,8 +1,8 @@
 from aqt import gui_hooks
 from aqt import mw
 
-from .model import add_model, check_model
 from .import_contacts import *
+from .model import check_model
 from .notes import *
 
 last_update = 0
@@ -20,16 +20,15 @@ def init():
     check_model(mw.col)
     update_age_cards(mw)
 
-
 gui_hooks.profile_did_open.append(lambda *args: init())
 gui_hooks.profile_will_close.append(lambda *args: update_age_cards(mw))
 gui_hooks.sync_will_start.append(lambda *args: update_age_cards(mw))
 gui_hooks.reviewer_did_show_question.append(lambda *args: interval_update())
 gui_hooks.editor_did_init.append(lambda *args: interval_update())
-gui_hooks.add_cards_did_add_note(lambda *args:update_age_cards(mw))
+gui_hooks.add_cards_did_add_note(lambda *args: update_age_cards(mw))
 
 
-# Set up Menu items
+# Set up menu items
 
 menu = mw.form.menuTools.addMenu("Age Updater")
 

@@ -25,7 +25,7 @@ CARD_FRONT = """\
 <br><br></span>
 
 <span id="use_desktop_warning">
-	⚠️ This card is outdated. Please launch Anki on your desktop to update your Age Updater notes.
+	⚠️ This card is outdated. Please launch Anki on your computer to update your Age Updater notes.
 <br><br></span>
 
 <script>

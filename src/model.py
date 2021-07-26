@@ -40,8 +40,6 @@ def check_model(col):
 
     if not all_fields_exist:
         display_warning('Your "Age Updater Note" note type is not set up properly. '
-                       "Please make sure that it  is named "
-                       '<i>"Age Updater Note</i>"'
-                       f" and includes all of the following fields: <br><br>- "
+                       "Please make sure that it includes all of the following fields: <br><br>- "
                        f"<i>{'<br>- '.join(FIELD_NAMES)}</i><br>")
     return all_fields_exist
