@@ -6,28 +6,32 @@ from .notes import *
 class ImportContactsDialog(QDialog):
 
     def import_google_contacts(self):
-        deck = self.deck_label.text()
-        if deck == "":
-            display_warning("Please select a deck first")
-            return
-        w = QWidget()
-        fname = QFileDialog.getOpenFileName(w, 'Open file', 'c:\\', "Contact Export File (Google/Outlook) (*.csv)")
-        if not fname[0]:
-            return
-        self.filename = fname[0]
-        self.contacts_file.setText(self.filename)
-        contacts = read_contacts(fname[0])
-        if contacts:
-            imported_contacts = []
-            for c in contacts:
-                try:
-                    create_age_card(self.mw, c[0], c[1], deck)
-                    imported_contacts.append(c)
-                except Exception as e:
-                    display_warning("Error while importing the contact for " + c[0])
+        try:
+            deck = self.deck_label.text()
+            if deck == "":
+                display_warning("Please select a deck first")
+                return
+            w = QWidget()
+            fname = QFileDialog.getOpenFileName(w, 'Open file', 'c:\\', "Contact Export File (Google/Outlook) (*.csv)")
+            if not fname[0]:
+                return
+            self.filename = fname[0]
+            self.contacts_file.setText(self.filename)
+            contacts = read_contacts(fname[0])
+            if contacts:
+                imported_contacts = []
+                for c in contacts:
+                    try:
+                        create_age_card(self.mw, c[0], c[1], deck)
+                        imported_contacts.append(c)
+                    except Exception as e:
+                        display_warning("Error while importing the contact for " + c[0])
 
-            update_age_cards(self.mw)
-            showInfo("The following contacts have been imported:<br><br>-" + "<br> - ".join([f'{x[0]} ({x[1]})' for x in imported_contacts]) + "<br>")
+                update_age_cards(self.mw)
+                showInfo("The following contacts have been imported:<br><br>- " + "<br> - ".join([f'{x[0]} ({x[1]})' for x in imported_contacts]) + "<br>")
+        except Exception as e:
+            display_warning("Error while importing contacts:<br><br>" + e)
+
 
     def deck_with_most_age_cards(self):
         age_cards = self.mw.col.findCards(f'"note:{NOTETYPE_NAME}"')

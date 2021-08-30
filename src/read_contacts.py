@@ -10,14 +10,14 @@ def read_contacts(csv_file):
     try:
         birthday_row = contacts[0].index("Birthday")
     except ValueError:
-        display_warning("This is not a valid contacts csv file")
+        display_warning('''This csv file has no column "Birthday"''')
         return None
 
     is_outlook = False
     try:
         all_contacts_w_birthday = [x for x in contacts[1:] if x[birthday_row]]
     except IndexError:
-        display_warning("None of your contacts have their date of birth specified")
+        display_warning("None of your contacts have their date of birth given")
         return None
 
 
