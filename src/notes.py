@@ -33,6 +33,7 @@ def create_age_card(mw, name, date_of_birth, deck):
 
 
 def update_age_cards(mw):
+    print("[Age Updater] Updating age notes...")
     try:
         age_card_ids = mw.col.find_cards(f'"note:{NOTETYPE_NAME}" AND "card:1"')  # Only select card type 1 because the user may want to create more card types from the same notes (Name => Birthday for example)
         for card_id in age_card_ids:

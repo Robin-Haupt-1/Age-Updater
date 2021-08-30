@@ -4,28 +4,23 @@ from aqt import mw
 from .import_contacts import *
 from .model import check_model
 from .notes import *
+from .constants import UPDATE_TIMER_TIMEOUT
 
-last_update = 0
-
-
-def interval_update():
-    global last_update
-    now = datetime.datetime.now().timestamp()
-    if now - last_update > 3600:
-        last_update = now
-        update_age_cards(mw)
+update_timer = None
 
 
 def init():
+    global update_timer
     check_model(mw.col)
     update_age_cards(mw)
+    update_timer = mw.progress.timer(UPDATE_TIMER_TIMEOUT, lambda *args: update_age_cards(mw), True)
 
+
+# Set up hooks
 
 gui_hooks.profile_did_open.append(lambda *args: init())
 gui_hooks.profile_will_close.append(lambda *args: update_age_cards(mw))
 gui_hooks.sync_will_start.append(lambda *args: update_age_cards(mw))
-gui_hooks.reviewer_did_show_question.append(lambda *args: interval_update())
-gui_hooks.editor_did_init.append(lambda *args: interval_update())
 gui_hooks.add_cards_did_add_note(lambda *args: update_age_cards(mw))
 
 # Set up menu items

@@ -1,5 +1,7 @@
 import anki.consts
 
+UPDATE_TIMER_TIMEOUT = 60 * 60 * 1000 # update age notes every hour
+
 NAME_FIELD = "Name"
 AGE_FIELD = "Age"
 DATE_OF_BIRTH_FIELD = "Date of birth (YYYY-MM-DD)"
