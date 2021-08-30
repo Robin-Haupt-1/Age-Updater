@@ -33,8 +33,10 @@ def create_age_card(mw, name, date_of_birth, deck):
 
 
 def update_age_cards(mw):
-    print("[Age Updater] Updating age notes...")
+    log("Updating age notes...",end="\t")
+    updated_cards=0
     try:
+
         age_card_ids = mw.col.find_cards(f'"note:{NOTETYPE_NAME}" AND "card:1"')  # Only select card type 1 because the user may want to create more card types from the same notes (Name => Birthday for example)
         for card_id in age_card_ids:
             card = mw.col.getCard(card_id)
@@ -63,7 +65,10 @@ def update_age_cards(mw):
                 card.factor = 0
                 card.left = 0
                 card.flush()
+                updated_cards+=1
+
 
     except Exception as e:
         showInfo("Error in Update Age Cards: " + str(e))
         pass
+    log(f"{updated_cards} notes updated",start="")
