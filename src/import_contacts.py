@@ -18,13 +18,13 @@ class ImportContactsDialog(QDialog):
         self.contacts_file.setText(self.filename)
         contacts = read_contacts(fname[0])
         if contacts:
-            imported_contacts=[]
+            imported_contacts = []
             for c in contacts:
                 try:
                     create_age_card(self.mw, c[0], c[1], deck)
                     imported_contacts.append(c)
                 except Exception as e:
-                    display_warning("Error while importing the contact for "+c[0])
+                    display_warning("Error while importing the contact for " + c[0])
 
             update_age_cards(self.mw)
             showInfo("The following contacts have been imported:<br><br>-" + "<br> - ".join([f'{x[0]} ({x[1]})' for x in imported_contacts]) + "<br>")
@@ -148,4 +148,4 @@ def on_import_google_contacts_call(mw):
     d = ImportContactsDialog(mw)
     # use both show() and exec_() to make the dialog not be removed by garbage collection: https://www.mail-archive.com/pyqt@riverbankcomputing.com/msg12512.html
     d.show()
-    d.exec_()
+    d.exec()
