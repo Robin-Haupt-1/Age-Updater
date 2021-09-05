@@ -34,7 +34,7 @@ class ImportContactsDialog(QDialog):
 
 
     def deck_with_most_age_cards(self):
-        age_cards = self.mw.col.findCards(f'"note:{NOTETYPE_NAME}"')
+        age_cards = self.mw.col.find_cards(f'"note:{NOTETYPE_NAME}"')
         if age_cards:
             count_decks = {}
             card_decks = self.mw.col.decks.for_card_ids(age_cards)
